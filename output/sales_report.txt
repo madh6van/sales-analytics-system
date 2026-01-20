@@ -1,91 +1,77 @@
 SALES ANALYTICS REPORT
 ========================================
-Generated: 2026-01-20 07:04:40
-Records Processed: 19
+Generated: 2026-01-20 07:11:05
+Records Processed: 13
 ========================================
 
 OVERALL SUMMARY
 ----------------------------------------
-Total Revenue: ₹1,320,580.00
-Total Transactions: 19
-Average Order Value: ₹69,504.21
-Date Range: 2024-12-01 to 2024-12-27
+Total Revenue: ₹889,332.00
+Total Transactions: 13
+Average Order Value: ₹68,410.15
+Date Range: 2024-12-01 to 2024-12-29
 
 REGION-WISE PERFORMANCE
 ----------------------------------------
 Region              Sales     % Total      Txns
-North     ₹  1,320,580.00     100.00%        19
+South     ₹    889,332.00     100.00%        13
 
 TOP 5 PRODUCTS
 ----------------------------------------
 Rank  Product             Qty     Revenue
-1     Wireless Mouse       19₹  19,934.00
-2     LaptopPremium        12₹ 933,316.00
-3     Mouse                11₹   8,682.00
-4     Headphones           10₹  50,029.00
-5     External Hard Drive       9₹  34,218.00
+1     Mouse                14₹   8,057.00
+2     LaptopPremium        10₹ 762,460.00
+3     Webcam               10₹  43,812.00
+4     USB Cable             8₹   1,384.00
+5     Wireless Mouse        8₹  11,460.00
 
 TOP 5 CUSTOMERS
 ----------------------------------------
 Rank  Customer           Spent    Orders
-1     C004        ₹ 818,960.00         1
-2     C008        ₹ 129,476.00         2
-3     C003        ₹ 114,356.00         1
-4     C010        ₹  78,867.00         1
-5     C028        ₹  48,359.00         2
+1     C017        ₹ 762,460.00         1
+2     C020        ₹  51,695.00         1
+3     C007        ₹  40,446.00         1
+4     C018        ₹  10,152.00         1
+5     C025        ₹   6,894.00         2
 
 DAILY SALES TREND
 ----------------------------------------
 Date             Revenue    Txns   Customers
-2024-12-01  ₹ 118,656.00       1           1
-2024-12-02  ₹   6,958.00       1           1
-2024-12-08  ₹   4,710.00       2           2
-2024-12-09  ₹  22,285.00       3           3
-2024-12-10  ₹   1,550.00       1           1
-2024-12-13  ₹  32,134.00       1           1
-2024-12-14  ₹  33,775.00       1           1
-2024-12-15  ₹ 818,960.00       1           1
-2024-12-17  ₹ 114,356.00       1           1
-2024-12-18  ₹  10,820.00       1           1
-2024-12-22  ₹  13,360.00       1           1
-2024-12-25  ₹  29,931.00       3           3
-2024-12-26  ₹  34,218.00       1           1
-2024-12-27  ₹  78,867.00       1           1
+2024-12-01  ₹   5,313.00       2           2
+2024-12-02  ₹ 775,978.00       3           3
+2024-12-07  ₹   3,186.00       1           1
+2024-12-09  ₹   3,054.00       1           1
+2024-12-22  ₹  51,695.00       1           1
+2024-12-24  ₹   3,528.00       1           1
+2024-12-25  ₹     524.00       1           1
+2024-12-27  ₹  40,446.00       1           1
+2024-12-29  ₹   5,608.00       2           2
 
 PRODUCT PERFORMANCE ANALYSIS
 ----------------------------------------
-Best Selling Day: 2024-12-15 (₹818,960.00, 1 txns)
+Best Selling Day: 2024-12-02 (₹775,978.00, 3 txns)
 Low Performing Products:
- - Webcam: 1 units, ₹2,986.00
- - Laptop: 2 units, ₹118,656.00
- - MonitorLED: 2 units, ₹32,134.00
- - Laptop Charger: 5 units, ₹13,814.00
- - KeyboardMechanical: 5 units, ₹13,360.00
- - Keyboard: 8 units, ₹14,584.00
- - External Hard Drive: 9 units, ₹34,218.00
- - External Hard Drive1TB: 9 units, ₹78,867.00
+ - Laptop Charger: 3 units, ₹6,240.00
+ - MouseWireless: 4 units, ₹4,224.00
+ - Monitor: 5 units, ₹51,695.00
+ - USB Cable: 8 units, ₹1,384.00
+ - Wireless Mouse: 8 units, ₹11,460.00
 
 API ENRICHMENT SUMMARY
 ----------------------------------------
 Total Products Enriched: 0
 Success Rate: 0.00%
 Products Not Enriched:
- - P109
+ - P107
  - P102
  - P109
  - P101
- - P109
- - P108
  - P110
- - P108
- - P101
+ - P110
+ - P102
+ - P102
+ - P102
  - P105
- - P106
- - P110
- - P103
- - P101
- - P102
  - P104
- - P106
- - P103
+ - P105
  - P109
