@@ -207,3 +207,114 @@ def low_performing_products(transactions, threshold=10):
 
     result.sort(key=lambda x: x[1])
     return result
+
+
+from datetime import datetime
+from collections import defaultdict
+
+
+def generate_sales_report(transactions, enriched_transactions, output_file="output/sales_report.txt"):
+    with open(output_file, "w", encoding="utf-8") as f:
+
+        # 1. HEADER
+        f.write("SALES ANALYTICS REPORT\n")
+        f.write("=" * 40 + "\n")
+        f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"Records Processed: {len(transactions)}\n")
+        f.write("=" * 40 + "\n\n")
+
+        # 2. OVERALL SUMMARY
+        total_revenue = calculate_total_revenue(transactions)
+        total_txns = len(transactions)
+        avg_order = total_revenue / total_txns if total_txns else 0
+
+        dates = [t["Date"] for t in transactions]
+        f.write("OVERALL SUMMARY\n")
+        f.write("-" * 40 + "\n")
+        f.write(f"Total Revenue: ₹{total_revenue:,.2f}\n")
+        f.write(f"Total Transactions: {total_txns}\n")
+        f.write(f"Average Order Value: ₹{avg_order:,.2f}\n")
+        f.write(f"Date Range: {min(dates)} to {max(dates)}\n\n")
+
+        # 3. REGION-WISE PERFORMANCE
+        regions = region_wise_sales(transactions)
+        f.write("REGION-WISE PERFORMANCE\n")
+        f.write("-" * 40 + "\n")
+        f.write(f"{'Region':<10}{'Sales':>15}{'% Total':>12}{'Txns':>10}\n")
+
+        for r, s in regions.items():
+            f.write(
+                f"{r:<10}₹{s['total_sales']:>14,.2f}"
+                f"{s['percentage']:>11.2f}%"
+                f"{s['transaction_count']:>10}\n"
+            )
+        f.write("\n")
+
+        # 4. TOP 5 PRODUCTS
+        top_products = top_selling_products(transactions, n=5)
+        f.write("TOP 5 PRODUCTS\n")
+        f.write("-" * 40 + "\n")
+        f.write(f"{'Rank':<6}{'Product':<15}{'Qty':>8}{'Revenue':>12}\n")
+
+        for i, (p, q, r) in enumerate(top_products, 1):
+            f.write(f"{i:<6}{p:<15}{q:>8}₹{r:>11,.2f}\n")
+        f.write("\n")
+
+        # 5. TOP 5 CUSTOMERS
+        customers = customer_analysis(transactions)
+        f.write("TOP 5 CUSTOMERS\n")
+        f.write("-" * 40 + "\n")
+        f.write(f"{'Rank':<6}{'Customer':<12}{'Spent':>12}{'Orders':>10}\n")
+
+        for i, (c, d) in enumerate(list(customers.items())[:5], 1):
+            f.write(
+                f"{i:<6}{c:<12}₹{d['total_spent']:>11,.2f}{d['purchase_count']:>10}\n"
+            )
+        f.write("\n")
+
+        # 6. DAILY SALES TREND
+        daily = daily_sales_trend(transactions)
+        f.write("DAILY SALES TREND\n")
+        f.write("-" * 40 + "\n")
+        f.write(f"{'Date':<12}{'Revenue':>12}{'Txns':>8}{'Customers':>12}\n")
+
+        for d, s in daily.items():
+            f.write(
+                f"{d:<12}₹{s['revenue']:>11,.2f}"
+                f"{s['transaction_count']:>8}"
+                f"{s['unique_customers']:>12}\n"
+            )
+        f.write("\n")
+
+        # 7. PRODUCT PERFORMANCE
+        peak = find_peak_sales_day(transactions)
+        low = low_performing_products(transactions)
+
+        f.write("PRODUCT PERFORMANCE ANALYSIS\n")
+        f.write("-" * 40 + "\n")
+        f.write(f"Best Selling Day: {peak[0]} (₹{peak[1]:,.2f}, {peak[2]} txns)\n")
+
+        if low:
+            f.write("Low Performing Products:\n")
+            for p, q, r in low:
+                f.write(f" - {p}: {q} units, ₹{r:,.2f}\n")
+        else:
+            f.write("No low performing products.\n")
+        f.write("\n")
+
+        # 8. API ENRICHMENT SUMMARY
+        matched = [t for t in enriched_transactions if t.get("API_Match")]
+        failed = [t for t in enriched_transactions if not t.get("API_Match")]
+        rate = (len(matched) / len(enriched_transactions) * 100) if enriched_transactions else 0
+
+        f.write("API ENRICHMENT SUMMARY\n")
+        f.write("-" * 40 + "\n")
+        f.write(f"Total Products Enriched: {len(matched)}\n")
+        f.write(f"Success Rate: {rate:.2f}%\n")
+
+        if failed:
+            f.write("Products Not Enriched:\n")
+            for t in failed:
+                f.write(f" - {t['ProductID']}\n")
+
+    print(f"✅ Sales report generated at {output_file}")

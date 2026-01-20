@@ -77,3 +77,10 @@ if __name__ == "__main__":
     save_enriched_data(enriched_transactions)
 
     print("\nQ4 COMPLETED: Enriched sales data saved")
+
+from utils.data_processor import generate_sales_report
+
+generate_sales_report(
+    final_transactions,
+    enriched_transactions
+)
