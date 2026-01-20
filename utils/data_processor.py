@@ -125,3 +125,85 @@ def customer_analysis(transactions):
 
     return sorted_result
 
+def daily_sales_trend(transactions):
+    daily = {}
+
+    for tx in transactions:
+        date = tx["Date"]
+        revenue = tx["Quantity"] * tx["UnitPrice"]
+        customer = tx["CustomerID"]
+
+        if date not in daily:
+            daily[date] = {
+                "revenue": 0.0,
+                "transaction_count": 0,
+                "customers": set()
+            }
+
+        daily[date]["revenue"] += revenue
+        daily[date]["transaction_count"] += 1
+        daily[date]["customers"].add(customer)
+
+    # Format output and sort by date
+    result = {}
+    for date in sorted(daily.keys()):
+        result[date] = {
+            "revenue": round(daily[date]["revenue"], 2),
+            "transaction_count": daily[date]["transaction_count"],
+            "unique_customers": len(daily[date]["customers"])
+        }
+
+    return result
+
+
+def find_peak_sales_day(transactions):
+    daily = {}
+
+    for tx in transactions:
+        date = tx["Date"]
+        revenue = tx["Quantity"] * tx["UnitPrice"]
+
+        if date not in daily:
+            daily[date] = {
+                "revenue": 0.0,
+                "transaction_count": 0
+            }
+
+        daily[date]["revenue"] += revenue
+        daily[date]["transaction_count"] += 1
+
+    peak_date = max(daily.items(), key=lambda x: x[1]["revenue"])
+
+    return (
+        peak_date[0],
+        round(peak_date[1]["revenue"], 2),
+        peak_date[1]["transaction_count"]
+    )
+
+
+def low_performing_products(transactions, threshold=10):
+    products = {}
+
+    for tx in transactions:
+        name = tx["ProductName"]
+        qty = tx["Quantity"]
+        revenue = qty * tx["UnitPrice"]
+
+        if name not in products:
+            products[name] = {
+                "quantity": 0,
+                "revenue": 0.0
+            }
+
+        products[name]["quantity"] += qty
+        products[name]["revenue"] += revenue
+
+    result = []
+    for name, data in products.items():
+        if data["quantity"] < threshold:
+            result.append(
+                (name, data["quantity"], round(data["revenue"], 2))
+            )
+
+    result.sort(key=lambda x: x[1])
+    return result

@@ -37,3 +37,19 @@ if __name__ == "__main__":
 
     print("\nCUSTOMER ANALYSIS")
     print(customer_analysis(final_transactions))
+
+
+from utils.data_processor import (
+    daily_sales_trend,
+    find_peak_sales_day,
+    low_performing_products
+)
+
+print("\nDAILY SALES TREND")
+print(daily_sales_trend(final_transactions))
+
+print("\nPEAK SALES DAY")
+print(find_peak_sales_day(final_transactions))
+
+print("\nLOW PERFORMING PRODUCTS")
+print(low_performing_products(final_transactions))
